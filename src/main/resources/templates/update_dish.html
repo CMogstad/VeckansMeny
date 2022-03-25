@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Dish</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
+    <title>Edit Dish</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
 </head>
-
 <body>
-<div class="h2 text-center">Add New Dish</div>
+<div class="h2 text-center">Edit Dish</div>
 
 <form th:action="@{/dish/save}" method="post" th:object="${dish}"
       style="max-width: 500px; margin: 0 auto;">
@@ -15,6 +15,12 @@
     <div class="border border-secondary p-4 rounded">
 
         <div class="form-group row">
+
+
+            <label class="col-sm-3">ID</label>
+            <div class="col-sm-8 mb-3">
+                <input type="text" class="form-control" readonly th:field="*{id}"/>
+            </div>
 
             <label class="col-sm-3">Food</label>
             <div class="col-sm-8 mb-3">
@@ -33,6 +39,8 @@
             </div>
         </div>
     </div>
+
+
 
 </form>
 </body>

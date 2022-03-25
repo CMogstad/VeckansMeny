@@ -52,8 +52,9 @@ public class VeckansMenyController {
 
     @GetMapping("/updateDish")
     public String showUpdateDishPage(Model model, Integer dishId) {
-        model.addAttribute("id", dishId);
-        return "updateDish";
+        Dish dish = dishService.findDishBasedOnId(dishId);
+        model.addAttribute("dish", dish);
+        return "update_dish";
     }
 
     @GetMapping("/updateIngredient")
@@ -64,7 +65,7 @@ public class VeckansMenyController {
 
     @GetMapping("/deleteDish")
     public String deleteDish(Integer dishId) {
-        deleteDish(dishId);
+        dishService.deleteDish(dishId);
         return "redirect:/";
     }
 
