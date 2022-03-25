@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Dish</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
+</head>
+
+<body>
+<div class="h2 text-center">Add New Dish</div>
+
+<form th:action="@{/dish/save}" method="post" th:object="${dish}"
+      style="max-width: 500px; margin: 0 auto;">
+
+    <div class="border border-secondary p-4 rounded">
+
+        <div class="form-group row">
+
+            <label class="col-sm-3">Food</label>
+            <div class="col-sm-8 mb-3">
+                <input type=" text" class="form-control" required th:field="*{name}"/>
+            </div>
+
+            <label class="col-sm-3">Type</label>
+            <div class="col-sm-8 mb-3">
+                <input type=" text" class="form-control" required th:field="*{type}"/>
+            </div>
+
+            <div>
+                <label class="col-sm-3"></label>
+                <button class="btn btn-primary mb-1" type="submit">Save Dish</button>
+            </div>
+        </div>
+    </div>
+
+    <a class="h4" th:href="@{/index}">Cancel</a>
+
+</form>
+</body>
+</html>

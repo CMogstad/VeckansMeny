@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veckans Meny</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="m-3">
+    <a th:href="@{/dishes/new}" class="btn btn-info" role="button">Add Dish</a>
+    <a th:href="@{/addNewIngredient}" class="btn btn-info" role="button">Add Ingredient</a>
+</div>
+
+<h3>Dishes</h3>
+<table class="table table-bordered">
+    <thead style="background-color: midnightblue; color: white">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-light">
+
+    <th:block th:each="dish : ${dishList}">
+        <tr>
+            <td th:text="${dish.id}"></td>
+            <td th:text="${dish.name}"></td>
+            <td th:text="${dish.type}"></td>
+            <td>
+                <a th:href="@{/updateDish(id=${dish.id})}" class="btn btn-info" role="button">Edit</a>
+                <a th:href="@{/deleteDish(id=${dish.id})}" class="btn btn-info" role="button">Delete</a>
+            </td>
+        </tr>
+    </th:block>
+
+    </tbody>
+
+</table>
+
+<h3>Ingredients</h3>
+<table class="table table-bordered">
+    <thead style="background-color: midnightblue; color: white">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-light">
+
+    <th:block th:each="ingredient : ${ingredientList}">
+        <tr>
+            <td th:text="${ingredient.id}"></td>
+            <td th:text="${ingredient.name}"></td>
+            <td>
+                <a th:href="@{/updateIngredient(id=${ingredient.id})}" class="btn btn-info" role="button">Edit</a>
+                <a th:href="@{/deleteIngredient(id=${ingredient.id})}" class="btn btn-info" role="button">Delete</a>
+            </td>
+        </tr>
+    </th:block>
+
+    </tbody>
+
+</table>
+
+
+</body>
+</html>
