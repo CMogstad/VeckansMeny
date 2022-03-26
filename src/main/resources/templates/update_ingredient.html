@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Ingredient</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
+</head>
+<body>
+<div class="h2 text-center">Edit Ingredient</div>
+
+<form th:action="@{/ingredient/save}" method="post" th:object="${ingredient}"
+style="max-width: 500px; margin: 0 auto;">
+
+    <div class="form btn-group row">
+
+        <label class="col-sm-3">ID</label>
+        <div class="col-sm-8 mb-3">
+            <input type="text" class="form-control" readonly th:field="*{id}"/>
+        </div>
+
+        <label class="col-sm-3">Ingredient</label>
+        <div class="col-sm-8 mb-3">
+            <input type="text" class="form-control" required th:field="*{name}"/>
+        </div>
+    </div>
+
+    <div class="col-sm-3"></div>
+    <button class="btn btn-primary mb-1" type="submit">Save Ingredient</button>
+    <button class="btn btn-primary mb-1" th:href="@{/}">Cancel</button>
+
+
+</form>
+</body>
+</html>

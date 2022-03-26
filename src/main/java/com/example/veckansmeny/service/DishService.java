@@ -15,8 +15,7 @@ public class DishService {
     @Autowired
     DishDao dishDao;
 
-    @Autowired
-    IngredientDao ingredientDao;
+
 
     public void saveDish(Dish dish) {
         dishDao.save(dish);
@@ -42,7 +41,4 @@ public class DishService {
         }
     }
 
-    public void saveIngredient(Ingredient ingredient) {
-        ingredientDao.save(ingredient);
-    }
 }

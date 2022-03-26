@@ -15,7 +15,7 @@ public class IngredientService {
     @Autowired
     IngredientDao ingredientDao;
 
-    public void saveIngredient(Ingredient ingredient){
+    public void saveIngredient(Ingredient ingredient) {
         ingredientDao.save(ingredient);
     }
 
@@ -28,11 +28,19 @@ public class IngredientService {
         ingredientDao.delete(ingredient);
     }
 
-    public void removeDishFromIngredients(List<Ingredient> ingredients, Dish dish){
-        for(Ingredient ingredient : ingredients){
+    public void removeDishFromIngredients(List<Ingredient> ingredients, Dish dish) {
+        for (Ingredient ingredient : ingredients) {
             ingredient.getDishes().remove(dish);
             saveIngredient(ingredient);
         }
     }
 
+
+    public void saveIngredientt(Ingredient ingredient) {
+        ingredientDao.save(ingredient);
+    }
+
+    public Ingredient findIngredientById(Integer ingredientId) {
+        return ingredientDao.findById(ingredientId).get();
+    }
 }

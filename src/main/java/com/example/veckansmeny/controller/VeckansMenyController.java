@@ -64,8 +64,9 @@ public class VeckansMenyController {
 
     @GetMapping("/updateIngredient")
     public String showUpdateIngredientPage(Model model, Integer ingredientId) {
-        model.addAttribute("id", ingredientId);
-        return "updateIngredient";
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
+        model.addAttribute("ingredient", ingredient);
+        return "update_ingredient";
     }
 
     @GetMapping("/deleteDish")
@@ -76,13 +77,13 @@ public class VeckansMenyController {
 
     @GetMapping("/deleteIngredient")
     public String deleteIngredient(Integer ingredientId) {
-        deleteIngredient(ingredientId);
+        ingredientService.deleteIngredient(ingredientId);
         return "redirect:/";
     }
 
     @PostMapping("/ingredient/save")
     public String saveIngredient(Ingredient ingredient) {
-        dishService.saveIngredient(ingredient);
+        ingredientService.saveIngredientt(ingredient);
         return "redirect:/";
     }
 
