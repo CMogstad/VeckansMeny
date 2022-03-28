@@ -35,11 +35,6 @@ public class IngredientService {
         }
     }
 
-
-    public void saveIngredientt(Ingredient ingredient) {
-        ingredientDao.save(ingredient);
-    }
-
     public Ingredient findIngredientById(Integer ingredientId) {
         return ingredientDao.findById(ingredientId).get();
     }

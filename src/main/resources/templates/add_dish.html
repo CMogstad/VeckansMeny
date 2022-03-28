@@ -23,17 +23,23 @@
 
             <label class="col-sm-3">Type</label>
             <div class="col-sm-8 mb-3">
-                <input type="text" class="form-control" required th:field="*{type}"/>
+                <input type="radio" required th:field="*{type}" th:value="Vegetarian"/>
+                <label th:for="Vegetarian">Vegetarian</label>
+                <br/>
+                <input type="radio" required th:field="*{type}" th:value="Non-vegetarian"/>
+                <label th:for="Non-vegetarian">Non-vegetarian</label>
             </div>
+
 
             <div>
                 <label class="col-sm-3"></label>
                 <button class="btn btn-primary mb-1" type="submit">Save Dish</button>
-                <button class="btn btn-primary mb-1" th:href="@{/en}">Cancel</button>
+                <a class="btn btn-primary mb-1" th:href="@{/}">Cancel</a>
             </div>
         </div>
     </div>
 
 </form>
+
 </body>
 </html>

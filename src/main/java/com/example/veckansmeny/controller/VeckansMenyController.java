@@ -37,7 +37,6 @@ public class VeckansMenyController {
         return "index";
     }
 
-
     @GetMapping("/dishes/new")
     public String showAddDish(Model model) {
         model.addAttribute("dish", new Dish());
@@ -45,9 +44,11 @@ public class VeckansMenyController {
     }
 
     @PostMapping("/dish/save")
-    public String saveDish(Dish dish) {
+    public String saveDish(Model model, Dish dish) {
         dishService.saveDish(dish);
-        return "redirect:/";
+        model.addAttribute("dish", dish);
+        model.addAttribute("ingredientList", dish.getIngredients());
+        return "update_dish";
     }
 
     @GetMapping("/addNewIngredient")
@@ -60,6 +61,7 @@ public class VeckansMenyController {
     public String showUpdateDishPage(Model model, Integer dishId) {
         Dish dish = dishService.findDishBasedOnId(dishId);
         model.addAttribute("dish", dish);
+        model.addAttribute("ingredientList", dish.getIngredients());
         return "update_dish";
     }
 
@@ -84,7 +86,7 @@ public class VeckansMenyController {
 
     @PostMapping("/ingredient/save")
     public String saveIngredient(Ingredient ingredient) {
-        ingredientService.saveIngredientt(ingredient);
+        ingredientService.saveIngredient(ingredient);
         return "redirect:/";
     }
 
@@ -118,5 +120,11 @@ public class VeckansMenyController {
         model.addAttribute("dish", dish);
 
         return "update_dish";
+    }
+
+    @GetMapping("/addIngredientToDish")
+    public String showAddIngredientToDishPage(){
+        //TODO : Update here
+        return "addIngredientToDish";
     }
 }
