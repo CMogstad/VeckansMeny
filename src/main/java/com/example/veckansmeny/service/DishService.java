@@ -15,8 +15,6 @@ public class DishService {
     @Autowired
     DishDao dishDao;
 
-
-
     public void saveDish(Dish dish) {
         dishDao.save(dish);
     }

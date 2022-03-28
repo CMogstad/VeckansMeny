@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veckans Meny</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
+
+</head>
+<body>
+
+<h3>Ingredients</h3>
+<table class="table table-bordered">
+    <input type="text" class="form-control" readonly th:field="*{dish.id}"/>
+    <thead style="background-color: midnightblue; color: white">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-light">
+    <th:block th:each="ingredient : ${ingredientList}">
+        <tr>
+            <td th:text="${ingredient.id}"></td>
+            <td th:text="${ingredient.name}"></td>
+            <td>
+                <a th:href="@{/updateDish/addIngredient/save(ingredientID=${ingredient.id},dishID=${dish.id})}" class="btn btn-info" role="button">Add</a>
+            </td>
+        </tr>
+    </th:block>
+
+    </tbody>
+
+</table>
+
+</body>
+</html>

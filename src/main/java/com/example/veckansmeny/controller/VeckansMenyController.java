@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -91,5 +92,31 @@ public class VeckansMenyController {
     public String showAddIngredient(Model model) {
         model.addAttribute("ingredient", new Ingredient());
         return "add_ingredient";
+    }
+
+    @GetMapping("/updateDish/addIngredient")
+    public String showAddIngredientToDishPage(Model model, Integer dishID){
+        System.out.println(dishID);
+        List<Ingredient> ingredientList = ingredientService.getAllIngredients();
+        Dish dish = dishService.findDishBasedOnId(dishID);
+
+        model.addAttribute("ingredientList", ingredientList);
+        model.addAttribute("dish", dish);
+        return "add_ingredient_to_dish";
+    }
+
+    @RequestMapping("/updateDish/addIngredient/save")
+    public String addIngredientToDish(Model model, Integer ingredientID, Integer dishID){
+        System.out.println(ingredientID);
+        System.out.println(dishID);
+        Dish dish = dishService.findDishBasedOnId(dishID);
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientID);
+
+        dish.addIngredient(ingredient);
+        dishService.saveDish(dish);
+
+        model.addAttribute("dish", dish);
+
+        return "update_dish";
     }
 }
