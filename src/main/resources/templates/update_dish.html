@@ -26,6 +26,8 @@
                 <input type="text" class="form-control" required th:field="*{name}"/>
             </div>
 
+            <input type="text" class="form-control" hidden th:field="*{ingredients}"/>
+
             <label class="col-sm-3">Type</label>
             <div class="col-sm-8 mb-3">
                 <input type="radio" required th:field="*{type}" th:value="Vegetarian"/>
@@ -55,7 +57,7 @@
                         <td th:text="${ingredient.id}"></td>
                         <td th:text="${ingredient.name}"></td>
                         <td>
-                            <a th:href="@{/removeIngredientFromDish(ingredientId=${ingredient.id})}"
+                            <a th:href="@{/updateDish/removeIngredient(ingredientId=${ingredient.id},dishID=${dish.id})}"
                                class="btn btn-info" role="button">Remove</a>
                         </td>
                     </tr>

@@ -97,8 +97,7 @@ public class VeckansMenyController {
     }
 
     @GetMapping("/updateDish/addIngredient")
-    public String showAddIngredientToDishPage(Model model, Integer dishID){
-        System.out.println(dishID);
+    public String showAddIngredientToDishPage(Model model, Integer dishID) {
         List<Ingredient> ingredientList = ingredientService.getAllIngredients();
         Dish dish = dishService.findDishBasedOnId(dishID);
 
@@ -108,9 +107,7 @@ public class VeckansMenyController {
     }
 
     @RequestMapping("/updateDish/addIngredient/save")
-    public String addIngredientToDish(Model model, Integer ingredientID, Integer dishID){
-        System.out.println(ingredientID);
-        System.out.println(dishID);
+    public String addIngredientToDish(Model model, Integer ingredientID, Integer dishID) {
         Dish dish = dishService.findDishBasedOnId(dishID);
         Ingredient ingredient = ingredientService.findIngredientById(ingredientID);
 
@@ -118,13 +115,22 @@ public class VeckansMenyController {
         dishService.saveDish(dish);
 
         model.addAttribute("dish", dish);
+        model.addAttribute("ingredientList", dish.getIngredients());
 
         return "update_dish";
     }
 
-    @GetMapping("/addIngredientToDish")
-    public String showAddIngredientToDishPage(){
-        //TODO : Update here
-        return "addIngredientToDish";
+    @GetMapping("/updateDish/removeIngredient")
+    public String removeIngredientFromDish(Model model, Integer dishID, Integer ingredientId) {
+        Dish dish = dishService.findDishBasedOnId(dishID);
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
+
+        dish.removeIngredient(ingredient);
+        dishService.saveDish(dish);
+
+        model.addAttribute("dish", dish);
+        model.addAttribute("ingredientList", dish.getIngredients());
+
+        return "update_dish";
     }
 }
