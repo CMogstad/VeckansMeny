@@ -170,4 +170,15 @@ public class VeckansMenyController {
 
         return "update_ingredient";
     }
+
+
+    @GetMapping("/generateRandomWeeklyMenu")
+    public String showRandomWeeklyMenuPage(Model model){
+        List<Dish> randomDishes = dishService.generateRandomDishes();
+
+        model.addAttribute("dishList", randomDishes);
+
+        return "random_weekly_menu";
+
+    }
 }

@@ -12,6 +12,7 @@
 <div class="m-3">
     <a th:href="@{/dishes/new}" class="btn btn-info" role="button">Add Dish</a>
     <a th:href="@{/addNewIngredient}" class="btn btn-info" role="button">Add Ingredient</a>
+    <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Weekly Menu</a>
 </div>
 
 <h3>Dishes</h3>
@@ -60,7 +61,8 @@
             <td th:text="${ingredient.id}"></td>
             <td th:text="${ingredient.name}"></td>
             <td>
-                <a th:href="@{/updateIngredient(ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Edit</a>
+                <a th:href="@{/updateIngredient(ingredientId=${ingredient.id})}" class="btn btn-info"
+                   role="button">Edit</a>
                 <a th:href="@{/deleteIngredient(ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Delete</a>
             </td>
         </tr>

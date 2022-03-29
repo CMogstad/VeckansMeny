@@ -7,7 +7,9 @@ import com.example.veckansmeny.model.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class DishService {
@@ -32,4 +34,16 @@ public class DishService {
         return dishDao.findById(dishId).get();
     }
 
+    public List<Dish> generateRandomDishes() {
+        List<Dish> dishes = findAllDishes();
+
+        List<Dish> selectDishes = new ArrayList<>();
+
+        ThreadLocalRandom.current().ints(0, dishes.size()).distinct().limit(7)
+                .forEach(d -> selectDishes.add(dishes.get(d)));
+
+        return selectDishes;
+
+
+    }
 }
