@@ -15,6 +15,9 @@
     <a th:href="@{/popularDishes}" class="btn btn-info" role="button">Popular Dishes Weekly menu</a>
     <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Weekly Menu</a>
 </div>
+<div th:if="${message}" class="alert alert-success text-center">
+    <span th:text="${message}"/>
+</div>
 
 <h3>Dishes</h3>
 <table class="table table-bordered">

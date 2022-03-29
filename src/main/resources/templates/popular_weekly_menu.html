@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -18,21 +18,20 @@
         <th>Ingredients</th>
     </tr>
     </thead>
-
     <tbody class="table-light">
-    <tr th:each="dish, String : ${dishList}">
-        <td th:text="${weekdays[String.index]}">Weekday</td>
-        <td th:text="${dish.name}"></td>
-        <td th:text="${dish.ingredientsFormatted}"></td>
+
+    <tr th:each="String, dish : ${weekdays}">
+        <td th:text="${String}">Weekday</td>
+        <td th:text="${sevenMostPopularDishes[dish.index].name}"></td>
+        <td th:text="${sevenMostPopularDishes[dish.index].ingredients}"></td>
     </tr>
     </th:block>
     </tbody>
 </table>
 
-<a th:href="@{/showShoppingList}" class="btn btn-primary mb-1" role="button">Show Shopping
+<a th:href="@{/showShoppingListPopular}" class="btn btn-primary mb-1" role="button">Show Shopping
     List</a>
 <a th:href="@{/}" class="btn btn-primary mb-1" role="button">Back</a>
-
 
 </body>
 </html>

@@ -13,6 +13,9 @@ public class Dish {
     private String type;
     private int likes;
 
+    @ManyToMany
+    List<Ingredient> ingredients;
+
     public int getLikes() {
         return likes;
     }
@@ -21,8 +24,6 @@ public class Dish {
         this.likes = likes;
     }
 
-    @ManyToMany
-    List<Ingredient> ingredients;
 
     public void setId(Integer id) {
         this.id = id;

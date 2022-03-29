@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -77,8 +77,9 @@ public class VeckansMenyController {
     }
 
     @GetMapping("/deleteDish")
-    public String deleteDish(Integer dishId) {
+    public String deleteDish(Integer dishId, RedirectAttributes redirectAttributes) {
         dishService.deleteDish(dishId);
+        redirectAttributes.addFlashAttribute("message", "Dish with id " + dishId + " deleted");
         return "redirect:/";
     }
 
@@ -175,11 +176,19 @@ public class VeckansMenyController {
     }
 
     @GetMapping("/popularDishes")
-    public String showPopularDishesPage(Model model) {
+    public String showPopularDishesPage(Model model, RedirectAttributes redirectAttributes) {
+        if (dishService.findAllDishes().size() < 7) {
+            redirectAttributes.addFlashAttribute("message", "At least 7 dishes needed to generate weekly menu");
+            return "redirect:/";
+        }
+
         List<Dish> sevenMostPopularDishes = dishService.findSevenMostPopularDishes();
         model.addAttribute("sevenMostPopularDishes", sevenMostPopularDishes);
 
-        return "popular_dishes";
+        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("weekdays", weekdays);
+
+        return "popular_weekly_menu";
     }
 
     @GetMapping("/likeDish")
@@ -194,9 +203,11 @@ public class VeckansMenyController {
     List<Dish> menuDishes; //TODO: Is this okay?
 
     @GetMapping("/generateRandomWeeklyMenu")
-    public String showRandomWeeklyMenuPage(Model model) {
-        if (dishService.findAllDishes().size() < 7)
+    public String showRandomWeeklyMenuPage(Model model, RedirectAttributes redirectAttributes) {
+        if (dishService.findAllDishes().size() < 7) {
+            redirectAttributes.addFlashAttribute("message", "At least 7 dishes needed to generate weekly menu");
             return "redirect:/";
+        }
 
         //List<Dish> dishList = dishService.generateRandomDishes();
         menuDishes = dishService.generateRandomDishes();;
@@ -222,4 +233,12 @@ public class VeckansMenyController {
         model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
     }
+
+    @GetMapping("/showShoppingListPopular")
+    public String showShoppingListPopular(Model model){
+        List<Ingredient> shoppingList = dishService.getShoppingList(dishService.findSevenMostPopularDishes());
+        model.addAttribute("shoppingList", shoppingList);
+        return "shopping_list";
+    }
+
 }
