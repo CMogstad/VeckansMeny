@@ -12,6 +12,7 @@
 <div class="m-3">
     <a th:href="@{/dishes/new}" class="btn btn-info" role="button">Add Dish</a>
     <a th:href="@{/addNewIngredient}" class="btn btn-info" role="button">Add Ingredient</a>
+    <a th:href="@{/popularDishes}" class="btn btn-info" role="button">Popular Dishes Weekly menu</a>
     <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Weekly Menu</a>
 </div>
 
@@ -22,6 +23,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Type</th>
+        <th>Likes</th>
         <th>Operations</th>
     </tr>
     </thead>
@@ -33,9 +35,13 @@
             <td th:text="${dish.id}"></td>
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.type}"></td>
+            <td th:text="${dish.likes}"></td>
+
             <td>
                 <a th:href="@{/updateDish(dishId=${dish.id})}" class="btn btn-info" role="button">Edit</a>
                 <a th:href="@{/deleteDish(dishId=${dish.id})}" class="btn btn-info" role="button">Delete</a>
+                <a th:href="@{/likeDish(dishId=${dish.id})}" class="btn btn-info" role="button">Like</a>
+
             </td>
         </tr>
     </th:block>

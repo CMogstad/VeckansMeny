@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 @Service
 public class DishService {
@@ -44,8 +47,19 @@ public class DishService {
                 .forEach(d -> selectDishes.add(dishes.get(d)));
 
         return selectDishes;
+    }
 
+    public List<Dish> findSevenMostPopularDishes(){
+        List<Dish> allDishes = dishDao.findAll();
 
+        List<Dish> sevenMostPopularDishes = allDishes.stream()
+                .sorted((d1, d2) -> d2.getLikes() - d1.getLikes())
+                .limit(7)
+                .collect(Collectors.toList());
+
+        Collections.shuffle(sevenMostPopularDishes);
+
+        return sevenMostPopularDishes;
     }
 
     public List<Ingredient> getShoppingList(List<Dish> dishList) {

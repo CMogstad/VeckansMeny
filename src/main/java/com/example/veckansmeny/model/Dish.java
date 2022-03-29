@@ -9,9 +9,17 @@ public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String name;
     private String type;
+    private int likes;
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
 
     @ManyToMany
     List<Ingredient> ingredients;

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -173,21 +171,31 @@ public class VeckansMenyController {
         return "update_ingredient";
     }
 
+    @GetMapping("/popularDishes")
+    public String showPopularDishesPage(Model model) {
+        List<Dish> sevenMostPopularDishes = dishService.findSevenMostPopularDishes();
+        model.addAttribute("sevenMostPopularDishes", sevenMostPopularDishes);
+
+        return "popular_dishes";
+    }
+
+    @GetMapping("/likeDish")
+    public String likeDish(Model model, Integer dishId) {
+        Dish dish = dishService.findDishBasedOnId(dishId);
+        dish.setLikes(dish.getLikes() + 1);
+        dishService.saveDish(dish);
+
+        return "redirect:/";
+    }
+
+
     @GetMapping("/generateRandomWeeklyMenu")
     public String showRandomWeeklyMenuPage(Model model) {
         List<Dish> randomDishes = dishService.generateRandomDishes();
 
         model.addAttribute("dishList", randomDishes);
 
-        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-        model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
-    }
 
-    @GetMapping("/showShoppingList")
-    public String showShoppingList(Model model, List<Dish> dishList) {
-        List<Ingredient> shoppingList = dishService.getShoppingList(dishList);
-        model.addAttribute("shoppingList", shoppingList);
-        return "shopping_list";
     }
 }

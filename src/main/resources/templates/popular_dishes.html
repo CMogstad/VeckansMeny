@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veckans Meny</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
+
+</head>
+<body>
+
+<span class="h1">Monday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(0).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(0).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Tuesday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(1).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(1).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Wednesday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(2).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(2).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Thursday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(3).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(3).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Friday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(4).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(4).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Saturday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(5).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(5).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+<span class="h1">Sunday</span>
+<br/>
+<span class="h3" th:text="${sevenMostPopularDishes.get(6).getName()}"></span>
+<br/>
+<th:block th:each="ingredient : ${sevenMostPopularDishes.get(6).getIngredients()}">
+    <span th:text="${ingredient.getName()}"></span>
+
+</th:block>
+<br/>
+
+
+</body>
+</html>
