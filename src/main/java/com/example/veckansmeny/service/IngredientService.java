@@ -28,13 +28,6 @@ public class IngredientService {
         ingredientDao.delete(ingredient);
     }
 
-    public void removeDishFromIngredients(List<Ingredient> ingredients, Dish dish) {
-        for (Ingredient ingredient : ingredients) {
-            ingredient.getDishes().remove(dish);
-            saveIngredient(ingredient);
-        }
-    }
-
     public Ingredient findIngredientById(Integer ingredientId) {
         return ingredientDao.findById(ingredientId).get();
     }

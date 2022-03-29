@@ -81,6 +81,8 @@ public class VeckansMenyController {
 
     @GetMapping("/deleteIngredient")
     public String deleteIngredient(Integer ingredientId) {
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
+        ingredient.removeIngredientFromDishes();
         ingredientService.deleteIngredient(ingredientId);
         return "redirect:/";
     }

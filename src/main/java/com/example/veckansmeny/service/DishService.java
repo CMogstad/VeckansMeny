@@ -32,11 +32,4 @@ public class DishService {
         return dishDao.findById(dishId).get();
     }
 
-    public void removeIngredientFromDishes(List<Dish> dishes, Ingredient ingredient) {
-        for (Dish dish : dishes) {
-            dish.getIngredients().remove(ingredient);
-            saveDish(dish);
-        }
-    }
-
 }

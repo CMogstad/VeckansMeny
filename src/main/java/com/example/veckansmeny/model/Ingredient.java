@@ -51,4 +51,10 @@ public class Ingredient {
         getDishes().remove(dish);
         dish.getIngredients().remove(this);
     }
+
+    public void removeIngredientFromDishes(){
+        for(Dish dish : dishes){
+            dish.getIngredients().remove(this);
+        }
+    }
 }

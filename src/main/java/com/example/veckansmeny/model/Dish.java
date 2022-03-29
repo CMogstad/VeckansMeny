@@ -52,7 +52,7 @@ public class Dish {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+        getIngredients().add(ingredient);
         ingredient.getDishes().add(this);
     }
 
