@@ -57,4 +57,9 @@ public class Ingredient {
             dish.getIngredients().remove(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
