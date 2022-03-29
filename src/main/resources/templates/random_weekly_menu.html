@@ -25,12 +25,12 @@
         <td th:text="${dishList[dish.index].name}"></td>
         <td th:text="${dishList[dish.index].ingredients}"></td>
     </tr>
-
     </th:block>
     </tbody>
 </table>
 
-<a th:href="@{/showShoppingList}" class="btn btn-primary mb-1" role="button">Show Shopping List</a>
+<a th:href="@{/showShoppingList(dishList=${dishList})}" class="btn btn-primary mb-1" role="button">Show Shopping
+    List</a>
 <a th:href="@{/}" class="btn btn-primary mb-1" role="button">Back</a>
 
 </body>

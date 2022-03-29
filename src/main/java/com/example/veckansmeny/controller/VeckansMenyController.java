@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -191,11 +193,15 @@ public class VeckansMenyController {
 
     @GetMapping("/generateRandomWeeklyMenu")
     public String showRandomWeeklyMenuPage(Model model) {
+        if (dishService.findAllDishes().size() < 7)
+            return "redirect:/";
+
         List<Dish> randomDishes = dishService.generateRandomDishes();
 
         model.addAttribute("dishList", randomDishes);
 
+        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
-
     }
 }
