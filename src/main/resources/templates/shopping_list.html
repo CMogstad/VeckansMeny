@@ -3,34 +3,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Random Weekly Menu</title>
+    <title>Shopping List</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
 </head>
 <body>
 
-<h2>Random Weekly Menu</h2>
-
 <table class="table table-bordered">
     <thead style="background-color: midnightblue; color: white">
     <tr>
-        <th>Week Day</th>
-        <th>Dish</th>
-        <th>Ingredients</th>
+        <th>Ingredient</th>
     </tr>
     </thead>
     <tbody class="table-light">
 
-    <tr th:each="String, dish : ${weekdays}">
-        <td th:text="${String}">Weekday</td>
-        <td th:text="${dishList[dish.index].name}"></td>
-        <td th:text="${dishList[dish.index].ingredients}"></td>
+    <tr th:each="ingredient : ${ingredientList}">
+        <td th:text="${ingredient.name}">Ingredient</td>
     </tr>
-
     </th:block>
     </tbody>
 </table>
 
-<a th:href="@{/showShoppingList}" class="btn btn-primary mb-1" role="button">Show Shopping List</a>
 <a th:href="@{/}" class="btn btn-primary mb-1" role="button">Back</a>
 
 </body>

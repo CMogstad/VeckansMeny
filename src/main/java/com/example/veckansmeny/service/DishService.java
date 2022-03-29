@@ -4,6 +4,7 @@ import com.example.veckansmeny.dao.DishDao;
 import com.example.veckansmeny.dao.IngredientDao;
 import com.example.veckansmeny.model.Dish;
 import com.example.veckansmeny.model.Ingredient;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,4 +47,15 @@ public class DishService {
 
 
     }
+
+    public List<Ingredient> getShoppingList(List<Dish> dishList) {
+        List<Ingredient> shoppingList = new ArrayList<>();
+        for (Dish dish : dishList) {
+            for (Ingredient ingredient : dish.getIngredients()) {
+                shoppingList.add(ingredient);
+            }
+        }
+        return shoppingList;
+    }
+
 }

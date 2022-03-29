@@ -140,16 +140,16 @@ public class VeckansMenyController {
     }
 
     @GetMapping("/updateIngredient/addDish")
-    public String showAddDishToIngredientPage(Model model, Integer ingredientID){
+    public String showAddDishToIngredientPage(Model model, Integer ingredientID) {
         List<Dish> dishList = dishService.findAllDishes();
         Ingredient ingredient = ingredientService.findIngredientById(ingredientID);
-        model.addAttribute("dishList",dishList);
+        model.addAttribute("dishList", dishList);
         model.addAttribute("ingredient", ingredient);
         return "add_dish_to_ingredient";
     }
 
     @RequestMapping("/updateIngredient/addDish/save")
-    public String addDishToIngredient(Model model, Integer ingredientId, Integer dishId){
+    public String addDishToIngredient(Model model, Integer ingredientId, Integer dishId) {
         Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
         Dish dish = dishService.findDishBasedOnId(dishId);
         dish.addIngredient(ingredient);
@@ -174,7 +174,7 @@ public class VeckansMenyController {
     }
 
     @GetMapping("/generateRandomWeeklyMenu")
-    public String showRandomWeeklyMenuPage(Model model){
+    public String showRandomWeeklyMenuPage(Model model) {
         List<Dish> randomDishes = dishService.generateRandomDishes();
 
         model.addAttribute("dishList", randomDishes);
@@ -182,5 +182,12 @@ public class VeckansMenyController {
         List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
         model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
+    }
+
+    @GetMapping("/showShoppingList")
+    public String showShoppingList(Model model, List<Dish> dishList) {
+        List<Ingredient> shoppingList = dishService.getShoppingList(dishList);
+        model.addAttribute("shoppingList", shoppingList);
+        return "shopping_list";
     }
 }
