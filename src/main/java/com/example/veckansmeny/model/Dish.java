@@ -69,13 +69,16 @@ public class Dish {
         ingredient.getDishes().remove(this);
     }
 
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", ingredients=" + ingredients +
-                '}';
+    public String getIngredientsFormatted() {
+        String formattedIngredients = "";
+        for(Ingredient ingredient : ingredients){
+            if(ingredients.indexOf(ingredient) == ingredients.size()-1){
+                formattedIngredients += (ingredient.getName());
+            } else {
+                formattedIngredients += (ingredient.getName() + ", ");
+            }
+        }
+        return formattedIngredients;
     }
+
 }

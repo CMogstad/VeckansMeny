@@ -8,22 +8,25 @@
 </head>
 <body>
 
+<h2>Shopping List</h2>
+
 <table class="table table-bordered">
     <thead style="background-color: midnightblue; color: white">
     <tr>
-        <th>Ingredient</th>
+        <th>Ingredients</th>
     </tr>
     </thead>
     <tbody class="table-light">
 
     <tr th:each="ingredient : ${shoppingList}">
-        <td th:text="${ingredient.name}">Ingredient</td>
+        <td th:text="${ingredient.name}"></td>
     </tr>
     </th:block>
     </tbody>
 </table>
 
-<a th:href="@{/}" class="btn btn-primary mb-1" role="button">Back</a>
+
+<a th:href="@{/getBackToMenu}" class="btn btn-primary mb-1" role="button">Back</a>
 
 </body>
 </html>

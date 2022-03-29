@@ -23,6 +23,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Type</th>
+        <th>Ingredients</th>
         <th>Likes</th>
         <th>Operations</th>
     </tr>
@@ -35,6 +36,7 @@
             <td th:text="${dish.id}"></td>
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.type}"></td>
+            <td th:text="${dish.ingredientsFormatted}"></td>
             <td th:text="${dish.likes}"></td>
 
             <td>

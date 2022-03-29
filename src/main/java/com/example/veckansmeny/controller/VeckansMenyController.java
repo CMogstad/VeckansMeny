@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -190,16 +191,33 @@ public class VeckansMenyController {
         return "redirect:/";
     }
 
+    List<Dish> menuDishes; //TODO: Is this okay?
 
     @GetMapping("/generateRandomWeeklyMenu")
     public String showRandomWeeklyMenuPage(Model model) {
         if (dishService.findAllDishes().size() < 7)
             return "redirect:/";
 
-        List<Dish> randomDishes = dishService.generateRandomDishes();
+        //List<Dish> dishList = dishService.generateRandomDishes();
+        menuDishes = dishService.generateRandomDishes();;
+        model.addAttribute("dishList", menuDishes);
 
-        model.addAttribute("dishList", randomDishes);
+        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("weekdays", weekdays);
+        return "random_weekly_menu";
+    }
 
+    @GetMapping("/showShoppingList")
+    public String showShoppingList(Model model) {
+        List<Ingredient> shoppingList = dishService.getShoppingList(menuDishes);
+        HashSet<Ingredient> uniqueShoppingList = new HashSet<>(shoppingList);
+        model.addAttribute("shoppingList", uniqueShoppingList);
+        return "shopping_list";
+    }
+
+    @GetMapping("/getBackToMenu")
+    public String getBackToMenuFromShoppingList(Model model){
+        model.addAttribute("dishList", menuDishes);
         List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
         model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
