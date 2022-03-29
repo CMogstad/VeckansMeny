@@ -3,39 +3,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Veckans Meny</title>
+    <title>Add a dish to an ingredient</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
-
 </head>
 <body>
-
-<h3>Ingredients</h3>
+<h3>Dishes</h3>
 <table class="table table-bordered">
-    <input type="text" class="form-control" hidden th:field="*{dish.id}"/>
+    <input type="text" class="form-control" readonly th:field="*{ingredient.id}"/>
     <thead style="background-color: midnightblue; color: white">
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Type</th>
         <th>Operations</th>
     </tr>
     </thead>
-
     <tbody class="table-light">
-    <th:block th:each="ingredient : ${ingredientList}">
+    <th:block th:each="dish : ${dishList}">
         <tr>
-            <td th:text="${ingredient.id}"></td>
-            <td th:text="${ingredient.name}"></td>
+            <td th:text="${dish.id}"></td>
+            <td th:text="${dish.name}"></td>
+            <td th:text="${dish.type}"></td>
             <td>
-                <a th:href="@{/updateDish/addIngredient/save(ingredientID=${ingredient.id},dishID=${dish.id})}"
-                   class="btn btn-info" role="button">Add</a>
+                <a th:href="@{/updateIngredient/addDish/save(dishId=${dish.id}, ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Add </a>
             </td>
         </tr>
     </th:block>
-
     </tbody>
-
 </table>
-<a class="btn btn-primary mb-1" th:href="@{/}">Back</a>
-
 </body>
 </html>

@@ -41,4 +41,14 @@ public class Ingredient {
         }
         return dishes;
     }
+
+    public void addDish(Dish dish) {
+        getDishes().add(dish);
+        dish.getIngredients().add(this);
+    }
+
+    public void removeDish(Dish dish) {
+        getDishes().remove(dish);
+        dish.getIngredients().remove(this);
+    }
 }

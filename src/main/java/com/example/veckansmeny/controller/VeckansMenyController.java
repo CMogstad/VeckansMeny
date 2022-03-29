@@ -69,6 +69,7 @@ public class VeckansMenyController {
     public String showUpdateIngredientPage(Model model, Integer ingredientId) {
         Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
         model.addAttribute("ingredient", ingredient);
+        model.addAttribute("dishList", ingredient.getDishes());
         return "update_ingredient";
     }
 
@@ -132,5 +133,39 @@ public class VeckansMenyController {
         model.addAttribute("ingredientList", dish.getIngredients());
 
         return "update_dish";
+    }
+
+    @GetMapping("/updateIngredient/addDish")
+    public String showAddDishToIngredientPage(Model model, Integer ingredientID){
+        List<Dish> dishList = dishService.findAllDishes();
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientID);
+        model.addAttribute("dishList",dishList);
+        model.addAttribute("ingredient", ingredient);
+        return "add_dish_to_ingredient";
+    }
+
+    @RequestMapping("/updateIngredient/addDish/save")
+    public String addDishToIngredient(Model model, Integer ingredientId, Integer dishId){
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
+        Dish dish = dishService.findDishBasedOnId(dishId);
+        dish.addIngredient(ingredient);
+        ingredientService.saveIngredient(ingredient);
+        model.addAttribute("ingredient", ingredient);
+        model.addAttribute("dishList", ingredient.getDishes());
+        return "update_ingredient";
+    }
+
+    @GetMapping("/updateIngredient/removeDish")
+    public String removeDishFromIngredient(Model model, Integer dishId, Integer ingredientId) {
+        Ingredient ingredient = ingredientService.findIngredientById(ingredientId);
+        Dish dish = dishService.findDishBasedOnId(dishId);
+
+        ingredient.removeDish(dish);
+        ingredientService.saveIngredient(ingredient);
+
+        model.addAttribute("ingredient", ingredient);
+        model.addAttribute("dishList", ingredient.getDishes());
+
+        return "update_ingredient";
     }
 }
