@@ -84,7 +84,7 @@ public class VeckansMenyController {
     public String deleteDish(Integer dishId, RedirectAttributes redirectAttributes) {
         dishService.deleteDish(dishId);
         redirectAttributes.addFlashAttribute("message", "Dish with id " + dishId + " deleted");
-        return "redirect:/";
+        return "redirect:";
     }
 
     @GetMapping("/deleteIngredient")
@@ -183,7 +183,7 @@ public class VeckansMenyController {
     public String showPopularDishesPage(Model model, RedirectAttributes redirectAttributes) {
         if (dishService.findAllDishes().size() < 7) {
             redirectAttributes.addFlashAttribute("message", "At least 7 dishes needed to generate weekly menu");
-            return "redirect:/";
+            return "redirect:";
         }
 
         List<Dish> sevenMostPopularDishes = dishService.findSevenMostPopularDishes();
@@ -201,14 +201,14 @@ public class VeckansMenyController {
         dish.setLikes(dish.getLikes() + 1);
         dishService.saveDish(dish);
 
-        return "redirect:/";
+        return "redirect:";
     }
 
     @GetMapping("/generateRandomWeeklyMenu")
     public String showRandomWeeklyMenuPage(Model model, RedirectAttributes redirectAttributes) {
         if (dishService.findAllDishes().size() < 7) {
             redirectAttributes.addFlashAttribute("message", "At least 7 dishes needed to generate weekly menu");
-            return "redirect:/";
+            return "redirect:";
         }
 
         domain.setMenuDishes(dishService.generateRandomDishes());
@@ -225,11 +225,12 @@ public class VeckansMenyController {
         List<Ingredient> shoppingList = dishService.getShoppingList(domain.getMenuDishes());
         HashSet<Ingredient> uniqueShoppingList = new HashSet<>(shoppingList);
         model.addAttribute("shoppingList", uniqueShoppingList);
+        model.addAttribute("getBack","/getBackToRandomMenu");
         return "shopping_list";
     }
 
-    @GetMapping("/getBackToMenu")
-    public String getBackToMenuFromShoppingList(Model model){
+    @GetMapping("/getBackToRandomMenu")
+    public String getBackToRandomMenuFromShoppingList(Model model){
         model.addAttribute("dishList", domain.getMenuDishes());
         List<String> weekdays = domain.getWeekdays();
         model.addAttribute("weekdays", weekdays);
@@ -240,7 +241,16 @@ public class VeckansMenyController {
     public String showShoppingListPopular(Model model){
         List<Ingredient> shoppingList = dishService.getShoppingList(dishService.findSevenMostPopularDishes());
         model.addAttribute("shoppingList", shoppingList);
+        model.addAttribute("getBack", "/getBackToPopularMenu");
         return "shopping_list";
+    }
+
+    @GetMapping("/getBackToPopularMenu")
+    public String getBackToPopularMenuFromShoppingList(Model model){
+        model.addAttribute("sevenMostPopularDishes", dishService.findSevenMostPopularDishes());
+        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("weekdays", weekdays);
+        return "popular_weekly_menu";
     }
 
 }

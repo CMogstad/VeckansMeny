@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<div class="container-fluid text-center">
 
 <div class="m-3">
     <a th:href="@{/dishes/new}" class="btn btn-info" role="button">Add Dish</a>
@@ -15,73 +16,76 @@
     <a th:href="@{/popularDishes}" class="btn btn-info" role="button">Popular Dishes Weekly menu</a>
     <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Weekly Menu</a>
 </div>
+
 <div th:if="${message}" class="alert alert-success text-center">
     <span th:text="${message}"/>
 </div>
 
-<h3>Dishes</h3>
-<table class="table table-bordered">
-    <thead style="background-color: midnightblue; color: white">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Ingredients</th>
-        <th>Likes</th>
-        <th>Operations</th>
-    </tr>
-    </thead>
-
-    <tbody class="table-light">
-
-    <th:block th:each="dish : ${dishList}">
+<div>
+    <h3>Dishes</h3>
+    <table class="table table-bordered">
+        <thead style="background-color: midnightblue; color: white">
         <tr>
-            <td th:text="${dish.id}"></td>
-            <td th:text="${dish.name}"></td>
-            <td th:text="${dish.type}"></td>
-            <td th:text="${dish.ingredientsFormatted}"></td>
-            <td th:text="${dish.likes}"></td>
-
-            <td>
-                <a th:href="@{/updateDish(dishId=${dish.id})}" class="btn btn-info" role="button">Edit</a>
-                <a th:href="@{/deleteDish(dishId=${dish.id})}" class="btn btn-info" role="button">Delete</a>
-                <a th:href="@{/likeDish(dishId=${dish.id})}" class="btn btn-info" role="button">Like</a>
-
-            </td>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Ingredients</th>
+            <th>Likes</th>
+            <th>Operations</th>
         </tr>
-    </th:block>
+        </thead>
 
-    </tbody>
+        <tbody class="table-light">
 
-</table>
+        <th:block th:each="dish : ${dishList}">
+            <tr>
+                <td th:text="${dish.id}"></td>
+                <td th:text="${dish.name}"></td>
+                <td th:text="${dish.type}"></td>
+                <td th:text="${dish.ingredientsFormatted}"></td>
+                <td th:text="${dish.likes}"></td>
 
-<h3>Ingredients</h3>
-<table class="table table-bordered">
-    <thead style="background-color: midnightblue; color: white">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Operations</th>
-    </tr>
-    </thead>
+                <td>
+                    <a th:href="@{/updateDish(dishId=${dish.id})}" class="btn btn-info" role="button">Edit</a>
+                    <a th:href="@{/deleteDish(dishId=${dish.id})}" class="btn btn-info" role="button">Delete</a>
+                    <a th:href="@{/likeDish(dishId=${dish.id})}" class="btn btn-info" role="button">Like</a>
 
-    <tbody class="table-light">
+                </td>
+            </tr>
+        </th:block>
 
-    <th:block th:each="ingredient : ${ingredientList}">
+        </tbody>
+
+    </table>
+
+    <h3>Ingredients</h3>
+    <table class="table table-bordered">
+        <thead style="background-color: midnightblue; color: white">
         <tr>
-            <td th:text="${ingredient.id}"></td>
-            <td th:text="${ingredient.name}"></td>
-            <td>
-                <a th:href="@{/updateIngredient(ingredientId=${ingredient.id})}" class="btn btn-info"
-                   role="button">Edit</a>
-                <a th:href="@{/deleteIngredient(ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Delete</a>
-            </td>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Operations</th>
         </tr>
-    </th:block>
+        </thead>
 
-    </tbody>
+        <tbody class="table-light">
 
-</table>
+        <th:block th:each="ingredient : ${ingredientList}">
+            <tr>
+                <td th:text="${ingredient.id}"></td>
+                <td th:text="${ingredient.name}"></td>
+                <td>
+                    <a th:href="@{/updateIngredient(ingredientId=${ingredient.id})}" class="btn btn-info"
+                       role="button">Edit</a>
+                    <a th:href="@{/deleteIngredient(ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Delete</a>
+                </td>
+            </tr>
+        </th:block>
 
+        </tbody>
+
+    </table>
+</div>
+</div>
 </body>
 </html>
