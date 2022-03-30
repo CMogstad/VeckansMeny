@@ -39,11 +39,6 @@ public class VeckansMenyController {
         return "index";
     }
 
-    @GetMapping("/en")
-    public String showIndex() {
-        return "index";
-    }
-
     @GetMapping("/dishes/new")
     public String showAddDish(Model model) {
         model.addAttribute("dish", new Dish());
@@ -187,10 +182,9 @@ public class VeckansMenyController {
         }
 
         domain.setMenuDishes(dishService.findSevenMostPopularDishes());
-
         model.addAttribute("sevenMostPopularDishes", domain.getMenuDishes());
 
-        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        List<String> weekdays = domain.getWeekdays();
         model.addAttribute("weekdays", weekdays);
 
         return "popular_weekly_menu";
@@ -221,7 +215,7 @@ public class VeckansMenyController {
         return "random_weekly_menu";
     }
 
-    @GetMapping("/showShoppingList")
+    @GetMapping("/showShoppingListRandom")
     public String showShoppingList(Model model) {
         List<Ingredient> shoppingList = dishService.getShoppingList(domain.getMenuDishes());
         HashSet<Ingredient> uniqueShoppingList = new HashSet<>(shoppingList);
