@@ -209,7 +209,6 @@ public class VeckansMenyController {
             return "redirect:/";
         }
 
-        //List<Dish> dishList = dishService.generateRandomDishes();
         menuDishes = dishService.generateRandomDishes();;
         model.addAttribute("dishList", menuDishes);
 
