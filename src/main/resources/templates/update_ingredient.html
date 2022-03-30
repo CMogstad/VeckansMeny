@@ -19,6 +19,9 @@
         <div class="col-sm-8 mb-3">
             <input type="text" class="form-control" required th:field="*{name}"/>
         </div>
+        <div class="col-sm-8 mb-3">
+            <label class="col-sm-3">Dishes</label>
+        </div>
     </div>
     <table class="table table-bordered">
         <thead style="background-color: darkblue; color: white">
@@ -26,7 +29,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Type</th>
-            <th>Operation</th>
+            <th></th>
         </tr>
         </thead>
 
@@ -45,10 +48,10 @@
         </tbody>
     </table>
     <div class="col-sm-3"></div>
-    <button class="btn btn-primary mb-1" type="submit">Save Ingredient</button>
-    <button class="btn btn-primary mb-1" th:href="@{/}">Cancel</button>
+    <button class="btn btn-primary mb-1" type="submit">Save</button>
+    <button class="btn btn-primary mb-1" th:href="@{/}">Back</button>
     <a class="btn btn-primary mb-1" th:href="@{/updateIngredient/addDish(ingredientID=${ingredient.id})}" type="submit">Add
-        dish</a>
+        Dish</a>
 </form>
 </form>
 </body>

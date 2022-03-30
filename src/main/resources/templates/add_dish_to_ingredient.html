@@ -15,7 +15,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Type</th>
-        <th>Operations</th>
+        <th></th>
     </tr>
     </thead>
     <tbody class="table-light">
@@ -25,7 +25,7 @@
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.type}"></td>
             <td>
-                <a th:href="@{/updateIngredient/addDish/save(dishId=${dish.id}, ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Add </a>
+                <a th:href="@{/updateIngredient/addDish/save(dishId=${dish.id}, ingredientId=${ingredient.id})}" class="btn btn-info" role="button">Add</a>
             </td>
         </tr>
     </th:block>

@@ -3,18 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Veckans Meny</title>
+    <title>Weekly Menu</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
 
 </head>
 <body>
 <div class="container-fluid text-center">
-
+<h1>Weekly Menu</h1>
 <div class="m-3">
     <a th:href="@{/dishes/new}" class="btn btn-info" role="button">Add Dish</a>
     <a th:href="@{/addNewIngredient}" class="btn btn-info" role="button">Add Ingredient</a>
-    <a th:href="@{/popularDishes}" class="btn btn-info" role="button">Popular Dishes Weekly menu</a>
-    <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Weekly Menu</a>
+    <a th:href="@{/popularDishes}" class="btn btn-info" role="button">Popular Dishes Menu</a>
+    <a th:href="@{/generateRandomWeeklyMenu}" class="btn btn-info" role="button">Random Dishes Menu</a>
 </div>
 
 <div th:if="${message}" class="alert alert-success text-center">
@@ -31,7 +31,7 @@
             <th>Type</th>
             <th>Ingredients</th>
             <th>Likes</th>
-            <th>Operations</th>
+            <th></th>
         </tr>
         </thead>
 
@@ -64,7 +64,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Operations</th>
+            <th></th>
         </tr>
         </thead>
 
