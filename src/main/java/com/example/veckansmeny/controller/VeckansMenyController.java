@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -31,11 +30,8 @@ public class VeckansMenyController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        List<Dish> listOfDishes = dishService.findAllDishes();
-        List<Ingredient> listOfIngredients = ingredientService.getAllIngredients();
-
-        model.addAttribute("dishList", listOfDishes);
-        model.addAttribute("ingredientList", listOfIngredients);
+        model.addAttribute("dishList", dishService.findAllDishes());
+        model.addAttribute("ingredientList", ingredientService.findAllIngredients());
         return "index";
     }
 
@@ -104,7 +100,7 @@ public class VeckansMenyController {
 
     @GetMapping("/updateDish/addIngredient")
     public String showAddIngredientToDishPage(Model model, Integer dishID) {
-        List<Ingredient> ingredientList = ingredientService.getAllIngredients();
+        List<Ingredient> ingredientList = ingredientService.findAllIngredients();
         Dish dish = dishService.findDishBasedOnId(dishID);
 
         model.addAttribute("ingredientList", ingredientList);

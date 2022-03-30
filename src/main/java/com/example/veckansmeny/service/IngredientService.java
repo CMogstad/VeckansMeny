@@ -19,7 +19,7 @@ public class IngredientService {
         ingredientDao.save(ingredient);
     }
 
-    public List<Ingredient> getAllIngredients() {
+    public List<Ingredient> findAllIngredients() {
         return ingredientDao.findAll();
     }
 
