@@ -1,5 +1,6 @@
 package com.example.veckansmeny.controller;
 
+import com.example.veckansmeny.domain.VeckansMenyDomain;
 import com.example.veckansmeny.model.Dish;
 import com.example.veckansmeny.model.Ingredient;
 import com.example.veckansmeny.service.DishService;
@@ -24,6 +25,9 @@ public class VeckansMenyController {
 
     @Autowired
     private IngredientService ingredientService;
+
+
+    private VeckansMenyDomain domain = new VeckansMenyDomain();
 
     @GetMapping("/")
     public String showHomePage(Model model) {
@@ -200,8 +204,6 @@ public class VeckansMenyController {
         return "redirect:/";
     }
 
-    List<Dish> menuDishes; //TODO: Is this okay?
-
     @GetMapping("/generateRandomWeeklyMenu")
     public String showRandomWeeklyMenuPage(Model model, RedirectAttributes redirectAttributes) {
         if (dishService.findAllDishes().size() < 7) {
@@ -209,17 +211,18 @@ public class VeckansMenyController {
             return "redirect:/";
         }
 
-        menuDishes = dishService.generateRandomDishes();;
-        model.addAttribute("dishList", menuDishes);
+        domain.setMenuDishes(dishService.generateRandomDishes());
 
-        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("dishList", domain.getMenuDishes());
+
+        List<String> weekdays = domain.getWeekdays();
         model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
     }
 
     @GetMapping("/showShoppingList")
     public String showShoppingList(Model model) {
-        List<Ingredient> shoppingList = dishService.getShoppingList(menuDishes);
+        List<Ingredient> shoppingList = dishService.getShoppingList(domain.getMenuDishes());
         HashSet<Ingredient> uniqueShoppingList = new HashSet<>(shoppingList);
         model.addAttribute("shoppingList", uniqueShoppingList);
         return "shopping_list";
@@ -227,8 +230,8 @@ public class VeckansMenyController {
 
     @GetMapping("/getBackToMenu")
     public String getBackToMenuFromShoppingList(Model model){
-        model.addAttribute("dishList", menuDishes);
-        List<String> weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        model.addAttribute("dishList", domain.getMenuDishes());
+        List<String> weekdays = domain.getWeekdays();
         model.addAttribute("weekdays", weekdays);
         return "random_weekly_menu";
     }
